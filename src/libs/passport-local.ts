@@ -1,6 +1,6 @@
 import { RequestHandler } from "express"
 import { Strategy as LocalStrategy } from "passport-local"
-import { createToken, findUserByEmailAndPassword } from "../services/user"
+import { createJWTToken, findUserByEmailAndPassword } from "../services/user"
 import { User } from "../types/user"
 import passport from "passport"
 
@@ -15,13 +15,13 @@ export interface ILocalStrategyResponse {
 //criar estrategia de autenticação (ver se está certo (consulta a db/api externa...))
 export const localStrategy = new LocalStrategy({
     //troca o nome padrão
-    usernameField: "gato",//mesmo nome que vem no req (json/query)
+    usernameField: "emial",//mesmo nome que vem no req (json/query)
     passwordField: "password"
-}, async (gato, password, done) => {//função de verificação
+}, async (emial, password, done) => {//função de verificação
 
-    const user = await findUserByEmailAndPassword(gato, password)
+    const user = await findUserByEmailAndPassword(emial, password)
     if (user) {
-        const token = createToken(user)
+        const token = createJWTToken(user)
         const response: ILocalStrategyResponse = {
             auth: {
                 token

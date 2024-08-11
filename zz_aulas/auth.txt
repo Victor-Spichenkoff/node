@@ -1,0 +1,15 @@
+1 - Criar o local strategy
+1.2 - coloca-lo no app
+1.3 - executar ele como um middleware
+
+# Funcionamento:
+- Modificar e escolher como vai receber os dados
+- Ver se está certo, se estiver, devolver o user + token
+- else: Devoler false (ambos pelo DONE())
+## Middleware:
+- Recebe o req, res, next
+- cria uma instancia com passport.authenticate("tipo", fn)
+-- fn == recebe os dados do done, vai decidir se o user pode fazer login ou se retorna agora um status 401 
+- executar esse instancia passadno o req, res, next
+
+
